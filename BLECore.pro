@@ -23,13 +23,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     listenerdata.cpp \
-    updatenotifier.cpp
+    updatenotifier.cpp \
+    blemaincontroller.cpp
 
 HEADERS += \
     listenerdata.h \
     listener.h \
     blemessage.h \
-    updatenotifier.h
+    updatenotifier.h \
+    blemaincontroller.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

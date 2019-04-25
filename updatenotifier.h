@@ -7,12 +7,12 @@
 class UpdateNotifier
 {
 private:
-    std::vector<BLEListener*> *listeners;
+    std::vector<BLEListener> *listeners;
 public:
     UpdateNotifier();
     ~UpdateNotifier();
 
-    void addListener(const BLEListener& listener);
+    void addListener(BLEListener &listener);
     void removeListener(const BLEListener& listener);
     void updateListener(const BLEListener& listener);
     void sendMessage(const BLEMessage& message);
