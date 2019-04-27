@@ -48,10 +48,10 @@ void BLEMainController::startAdvertisingSession(AdvertisingDelegate advertisingD
 
     QLowEnergyController* periperal = QLowEnergyController::createPeripheral();
 
-    QObject::connect(periperal,SIGNAL(connected()),this->qt_advertisingDelegate,SLOT(connected()));
-    QObject::connect(periperal,SIGNAL(disconnected()),this->qt_advertisingDelegate,SLOT(disconnected()));
-    QObject::connect(periperal,SIGNAL(stateChanged()),this->qt_advertisingDelegate,SLOT(stateChanged()));
-    QObject::connect(periperal,SIGNAL(error()),this->qt_advertisingDelegate,SLOT(errorOccurred()));
+    QObject::connect(periperal,SIGNAL(QLowEnergyController::connected),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::connected));
+    QObject::connect(periperal,SIGNAL(QLowEnergyController::disconnected),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::disconnected));
+    QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::stateChanged));
+    QObject::connect(periperal,SIGNAL(QLowEnergyController::error),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::errorOccurred));
 
 
     const QScopedPointer<QLowEnergyController> leController(periperal);

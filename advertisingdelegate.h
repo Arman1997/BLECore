@@ -30,6 +30,7 @@ private slots:
     void disconnected() {
         advertisingDelegate->disconnected();
     }
+
     void stateChanged(QLowEnergyController::ControllerState newState) {
         advertisingDelegate->stateChanged(newState);
     }

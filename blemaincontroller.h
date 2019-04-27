@@ -10,11 +10,11 @@ public:
     ~BLEMainController();
 
     void startAdvertisingSession(AdvertisingDelegate advertisingDelegate);
+    void startListeningSession();
 
 private:
     QT_AdvertisingDelegate* qt_advertisingDelegate;
 
-    // AdvertisingDelegate interface
 public:
     void connected();
     void disconnected();

@@ -24,14 +24,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     listenerdata.cpp \
     blemaincontroller.cpp \
-    advertisingdelegate.cpp
+    advertisingdelegate.cpp \
+    listeningdelegate.cpp
 
 HEADERS += \
     listenerdata.h \
     listener.h \
     blemessage.h \
     blemaincontroller.h \
-    advertisingdelegate.h
+    advertisingdelegate.h \
+    listeningdelegate.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
