@@ -19,13 +19,21 @@ BLEMainController::BLEMainController()
 
 BLEMainController::~BLEMainController()
 {
-    delete qt_advertisingDelegate;
+    delete qt_connectionDelegate;
+    delete qt_connectionDataSource;
 }
 
-void BLEMainController::startAdvertisingSession(ConnectionDelegate advertisingDelegate)
+void BLEMainController::establishConnectionSignals(QLowEnergyController *periperal)
 {
-    qt_advertisingDelegate = new QT_ConnectionDelegate(&advertisingDelegate);
+    if(!this->qt_connectionDelegate)
+    {
+        QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),this->qt_connectionDelegate,SLOT(QT_ConnectionDelegate::stateChanged));
+        QObject::connect(periperal,SIGNAL(QLowEnergyController::error),this->qt_connectionDelegate,SLOT(QT_ConnectionDelegate::errorOccurred));
+    }
+}
 
+void BLEMainController::startAdvertisingSession()
+{
     QLowEnergyAdvertisingData advertisingData;
     advertisingData.setDiscoverability(QLowEnergyAdvertisingData::DiscoverabilityGeneral);
     advertisingData.setIncludePowerLevel(true);
@@ -47,13 +55,21 @@ void BLEMainController::startAdvertisingSession(ConnectionDelegate advertisingDe
     serviceData.addCharacteristic(charData);
 
     QLowEnergyController* periperal = QLowEnergyController::createPeripheral();
-    QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),this->qt_advertisingDelegate,SLOT(QT_ConnectionDelegate::stateChanged));
-    QObject::connect(periperal,SIGNAL(QLowEnergyController::error),this->qt_advertisingDelegate,SLOT(QT_ConnectionDelegate::errorOccurred));
 
-
+    establishConnectionSignals(periperal);
     const QScopedPointer<QLowEnergyController> leController(periperal);
     QScopedPointer<QLowEnergyService> service(leController->addService(serviceData));
     leController->startAdvertising(QLowEnergyAdvertisingParameters(), advertisingData,
                                    advertisingData);
 
+}
+
+void BLEMainController::setConnectionDelegate(ConnectionDelegate connectionDelegate)
+{
+    qt_connectionDelegate = new QT_ConnectionDelegate(&connectionDelegate);
+}
+
+void BLEMainController::setConnectionDataSource(ConnectionDataSource connectionDateSource)
+{
+    qt_connectionDataSource = new QT_ConnectionDataSource(&connectionDateSource);
 }
