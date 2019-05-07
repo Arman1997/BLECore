@@ -22,9 +22,9 @@ BLEMainController::~BLEMainController()
     delete qt_advertisingDelegate;
 }
 
-void BLEMainController::startAdvertisingSession(AdvertisingDelegate advertisingDelegate)
+void BLEMainController::startAdvertisingSession(ConnectionDelegate advertisingDelegate)
 {
-    qt_advertisingDelegate = new QT_AdvertisingDelegate(&advertisingDelegate);
+    qt_advertisingDelegate = new QT_ConnectionDelegate(&advertisingDelegate);
 
     QLowEnergyAdvertisingData advertisingData;
     advertisingData.setDiscoverability(QLowEnergyAdvertisingData::DiscoverabilityGeneral);
@@ -47,11 +47,8 @@ void BLEMainController::startAdvertisingSession(AdvertisingDelegate advertisingD
     serviceData.addCharacteristic(charData);
 
     QLowEnergyController* periperal = QLowEnergyController::createPeripheral();
-
-    QObject::connect(periperal,SIGNAL(QLowEnergyController::connected),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::connected));
-    QObject::connect(periperal,SIGNAL(QLowEnergyController::disconnected),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::disconnected));
-    QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::stateChanged));
-    QObject::connect(periperal,SIGNAL(QLowEnergyController::error),this->qt_advertisingDelegate,SLOT(QT_AdvertisingDelegate::errorOccurred));
+    QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),this->qt_advertisingDelegate,SLOT(QT_ConnectionDelegate::stateChanged));
+    QObject::connect(periperal,SIGNAL(QLowEnergyController::error),this->qt_advertisingDelegate,SLOT(QT_ConnectionDelegate::errorOccurred));
 
 
     const QScopedPointer<QLowEnergyController> leController(periperal);

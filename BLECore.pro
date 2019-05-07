@@ -25,7 +25,8 @@ SOURCES += \
     listenerdata.cpp \
     blemaincontroller.cpp \
     advertisingdelegate.cpp \
-    listeningdelegate.cpp
+    listeningdelegate.cpp \
+    servicedata.cpp
 
 HEADERS += \
     listenerdata.h \
@@ -33,7 +34,8 @@ HEADERS += \
     blemessage.h \
     blemaincontroller.h \
     advertisingdelegate.h \
-    listeningdelegate.h
+    listeningdelegate.h \
+    servicedata.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

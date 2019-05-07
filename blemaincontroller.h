@@ -3,22 +3,22 @@
 
 #include <advertisingdelegate.h>
 
-class BLEMainController: public AdvertisingDelegate
+class BLEMainController: public ConnectionDelegate
 {
 public:
     BLEMainController();
     ~BLEMainController();
 
-    void startAdvertisingSession(AdvertisingDelegate advertisingDelegate);
+    void startAdvertisingSession(ConnectionDelegate advertisingDelegate);
     void startListeningSession();
 
 private:
-    QT_AdvertisingDelegate* qt_advertisingDelegate;
+    QT_ConnectionDelegate* qt_advertisingDelegate;
 
 public:
     void connected();
     void disconnected();
-    void stateChanged(QLowEnergyController::ControllerState newState);
+    void connectionStateUpdated(QLowEnergyController::ControllerState newState);
     void errorOccurred(QLowEnergyController::Error newError);
 };
 

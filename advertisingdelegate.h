@@ -4,43 +4,33 @@
 #include <QtBluetooth/qlowenergycontroller.h>
 
 
-class AdvertisingDelegate {
+class ConnectionDelegate {
 public:
-    virtual void connected() = 0;
-    virtual void disconnected() = 0;
-    virtual void stateChanged(QLowEnergyController::ControllerState newState) = 0;
+    virtual void connectionStateUpdated(QLowEnergyController::ControllerState newState) = 0;
     virtual void errorOccurred(QLowEnergyController::Error newError) = 0;
 
-    virtual ~AdvertisingDelegate();
+    virtual ~ConnectionDelegate();
 };
 
-class QT_AdvertisingDelegate: public QObject {
+class QT_ConnectionDelegate: public QObject {
     Q_OBJECT
 
 public:
-    QT_AdvertisingDelegate(AdvertisingDelegate* delegate) {
-        this->advertisingDelegate = delegate;
+    QT_ConnectionDelegate(ConnectionDelegate* delegate) {
+        this->connectionDelegate = delegate;
     }
 
 private slots:
-    void connected() {
-        advertisingDelegate->connected();
-    }
-
-    void disconnected() {
-        advertisingDelegate->disconnected();
-    }
-
     void stateChanged(QLowEnergyController::ControllerState newState) {
-        advertisingDelegate->stateChanged(newState);
+        connectionDelegate->connectionStateUpdated(newState);
     }
 
     void errorOccurred(QLowEnergyController::Error newError) {
-        advertisingDelegate->errorOccurred(newError);
+        connectionDelegate->errorOccurred(newError);
     }
 
 private:
-    AdvertisingDelegate* advertisingDelegate;
+    ConnectionDelegate* connectionDelegate;
 };
 
 #endif // ADVERTISINGDELEGATE_H
