@@ -25,7 +25,7 @@ BLEMainController::~BLEMainController()
 
 void BLEMainController::establishConnectionSignals(QLowEnergyController *periperal)
 {
-    if(!this->qt_connectionDelegate)
+    if(qt_connectionDelegate)
     {
         QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),this->qt_connectionDelegate,SLOT(QT_ConnectionDelegate::stateChanged));
         QObject::connect(periperal,SIGNAL(QLowEnergyController::error),this->qt_connectionDelegate,SLOT(QT_ConnectionDelegate::errorOccurred));
@@ -61,6 +61,11 @@ void BLEMainController::startAdvertisingSession()
     QScopedPointer<QLowEnergyService> service(leController->addService(serviceData));
     leController->startAdvertising(QLowEnergyAdvertisingParameters(), advertisingData,
                                    advertisingData);
+
+}
+
+void BLEMainController::startListeningSession()
+{
 
 }
 
