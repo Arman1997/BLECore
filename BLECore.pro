@@ -37,7 +37,8 @@ HEADERS += \
     advertisingdelegate.h \
     listeningdelegate.h \
     servicedata.h \
-    connectionerror.h
+    connectionerror.h \
+    connectionstate.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
