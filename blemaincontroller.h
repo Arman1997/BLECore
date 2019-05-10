@@ -4,6 +4,7 @@
 #include <advertisingdelegate.h>
 #include <listeningdelegate.h>
 
+
 class BLEMainController: public ConnectionDelegate
 {
 public:
@@ -18,6 +19,7 @@ private:
     QT_ConnectionDataSource* qt_connectionDataSource = nullptr;
 
     void establishConnectionSignals(QLowEnergyController* periperal);
+   // void establishDataSourceSignals(QBluetoothDeviceDiscoveryAgent* deviceDiscoveryAgent);
 
 public:
     void connected();

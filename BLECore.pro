@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       -= gui
+QT       += bluetooth
 
 TARGET = BLECore
 TEMPLATE = lib
@@ -35,7 +36,8 @@ HEADERS += \
     blemaincontroller.h \
     advertisingdelegate.h \
     listeningdelegate.h \
-    servicedata.h
+    servicedata.h \
+    connectionerror.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

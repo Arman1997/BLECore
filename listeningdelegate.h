@@ -3,13 +3,18 @@
 
 #include<servicedata.h>
 #include<QObject>
+#include<listenerdata.h>
 
 class ConnectionDataSource
 {
 public:
-    virtual void serviceUpdated(ServiceData  serviceData) = 0;
-    virtual void serviceAdded(ServiceData serviceData) = 0;
-    virtual void serviceRemoved(ServiceData serviceData) = 0;
+    virtual void serviceUpdated(const ServiceData &serviceData) = 0;
+    virtual void serviceAdded(const ServiceData &serviceData) = 0;
+    virtual void serviceRemoved(const ServiceData &serviceData) = 0;
+
+    virtual void deviceAdded(const BLEUserData &userData) = 0;
+    virtual void deviceRemoved(const BLEUserData &userData) = 0;
+    virtual void deviceUpdated(const BLEUserData &userData) = 0;
 
     virtual ~ConnectionDataSource();
 
@@ -39,6 +44,21 @@ void serviceAdded(ServiceData serviceData)
 void serviceRemoved(ServiceData serviceData)
 {
     connectionDataSource->serviceRemoved(serviceData);
+}
+
+void deviceAdded(const BLEUserData &userData)
+{
+    connectionDataSource->deviceAdded(userData);
+}
+
+void deviceRemoved(const BLEUserData &userData)
+{
+    connectionDataSource->deviceRemoved(userData);
+}
+
+void deviceUpdated(const BLEUserData &userData)
+{
+    connectionDataSource->deviceUpdated(userData);
 }
 
 private:
