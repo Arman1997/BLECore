@@ -1,1 +1,1 @@
-#include <advertisingdelegate.h>
+#include <connectiondelegate.h>

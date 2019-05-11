@@ -2,7 +2,7 @@
 #define BLEMAINCONTROLLER_H
 
 #include "qtconnectiondelegateadapter.h"
-#include <listeningdelegate.h>
+#include <connectiondatasource.h>
 #include <qbluetoothdevicediscoveryagent.h>
 #include "connectionmanager.h"
 
@@ -20,17 +20,12 @@ private:
     QTConnectionDelegateAdapter *m_connectionDelegateAdapter = nullptr;
     ConnectionManager *m_connectionManager = nullptr;
 
-    QBluetoothDeviceDiscoveryAgent* deviceDiscoveryAgent;
+    QBluetoothDeviceDiscoveryAgent* m_deviceDiscoveryAgent;
 
-    void establishConnectionSignals(QLowEnergyController* periperal);
-    void establishDataSourceSignals(QBluetoothDeviceDiscoveryAgent* deviceDiscoveryAgent);
+    void establishConnectionSignals(QLowEnergyController *periperal);
+    void establishDataSourceSignals(QBluetoothDeviceDiscoveryAgent *deviceDiscoveryAgent);
 
 public:
-    void connected();
-    void disconnected();
-    void connectionStateUpdated(BLEConnectionState::ConnectionState newState);
-    void errorOccurred(BLEConnectionError::Error newError);
-
     void setConnectionDelegate(ConnectionDelegate connectionDelegate);
     void setConnectionDataSource(ConnectionDataSource connectionDateSource);
 };

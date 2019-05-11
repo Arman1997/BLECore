@@ -21,7 +21,7 @@ BLEMainController::~BLEMainController()
 {
     delete m_connectionDelegateAdapter;
     delete m_connectionManager;
-    delete deviceDiscoveryAgent;
+    delete m_deviceDiscoveryAgent;
 }
 
 void BLEMainController::establishConnectionSignals(QLowEnergyController *periperal)
@@ -96,10 +96,10 @@ void BLEMainController::startAdvertisingSession()
 
 void BLEMainController::startListeningSession()
 {
-    deviceDiscoveryAgent = new QBluetoothDeviceDiscoveryAgent(nullptr);
-    deviceDiscoveryAgent->setLowEnergyDiscoveryTimeout(5000);
-    establishDataSourceSignals(deviceDiscoveryAgent);
-    deviceDiscoveryAgent->start(QBluetoothDeviceDiscoveryAgent::LowEnergyMethod);
+    m_deviceDiscoveryAgent = new QBluetoothDeviceDiscoveryAgent(nullptr);
+    m_deviceDiscoveryAgent->setLowEnergyDiscoveryTimeout(5000);
+    establishDataSourceSignals(m_deviceDiscoveryAgent);
+    m_deviceDiscoveryAgent->start(QBluetoothDeviceDiscoveryAgent::LowEnergyMethod);
 }
 
 void BLEMainController::setConnectionDelegate(ConnectionDelegate connectionDelegate)
@@ -109,5 +109,5 @@ void BLEMainController::setConnectionDelegate(ConnectionDelegate connectionDeleg
 
 void BLEMainController::setConnectionDataSource(ConnectionDataSource connectionDateSource)
 {
-    m_connectionManager = new ConnectionManager(&connectionDateSource);
+    m_connectionManager = new ConnectionManager(&connectionDateSource,m_connectionDelegateAdapter);
 }

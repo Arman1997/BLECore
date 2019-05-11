@@ -8,17 +8,17 @@ void QTConnectionDelegateAdapter::deviceDiscovered(const QBluetoothDeviceInfo &i
     connectionDelegate->connectionStateUpdated(BLEConnectionState::ConnectionState::DiscoveredState);
 }
 
-void QTConnectionDelegateAdapter::finished()
+void QTConnectionDelegateAdapter::finished() const
 {
     connectionDelegate->connectionStateUpdated(BLEConnectionState::ConnectionState::Finished);
 }
 
-void QTConnectionDelegateAdapter::canceled()
+void QTConnectionDelegateAdapter::canceled() const
 {
     connectionDelegate->connectionStateUpdated(BLEConnectionState::ConnectionState::Canceled);
 }
 
-void QTConnectionDelegateAdapter::stateChanged(QLowEnergyController::ControllerState newState)
+void QTConnectionDelegateAdapter::stateChanged(QLowEnergyController::ControllerState newState) const
 {
     switch (newState) {
     case QLowEnergyController::ControllerState::UnconnectedState:
@@ -45,7 +45,7 @@ void QTConnectionDelegateAdapter::stateChanged(QLowEnergyController::ControllerS
     }
 }
 
-void QTConnectionDelegateAdapter::errorOccurred(QLowEnergyController::Error newError)
+void QTConnectionDelegateAdapter::errorOccurred(QLowEnergyController::Error newError) const
 {
     switch (newError) {
 
@@ -83,7 +83,7 @@ void QTConnectionDelegateAdapter::errorOccurred(QLowEnergyController::Error newE
     }
 }
 
-void QTConnectionDelegateAdapter::errorOccurred(QBluetoothDeviceDiscoveryAgent::Error error)
+void QTConnectionDelegateAdapter::errorOccurred(QBluetoothDeviceDiscoveryAgent::Error error) const
 {
     switch (error) {
     case QBluetoothDeviceDiscoveryAgent::Error::NoError:

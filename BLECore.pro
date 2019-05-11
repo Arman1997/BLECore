@@ -29,19 +29,21 @@ SOURCES += \
     listeningdelegate.cpp \
     servicedata.cpp \
     connectionmanager.cpp \
-    qtconnectiondelegateadapter.cpp
+    qtconnectiondelegateadapter.cpp \
+    deviceinfo.cpp
 
 HEADERS += \
     listenerdata.h \
     blemessage.h \
     blemaincontroller.h \
-    advertisingdelegate.h \
-    listeningdelegate.h \
     servicedata.h \
     connectionerror.h \
     connectionstate.h \
     connectionmanager.h \
-    qtconnectiondelegateadapter.h
+    qtconnectiondelegateadapter.h \
+    connectiondelegate.h \
+    connectiondatasource.h \
+    deviceinfo.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

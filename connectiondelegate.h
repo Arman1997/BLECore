@@ -6,8 +6,8 @@
 
 class ConnectionDelegate {
 public:
-    virtual void connectionStateUpdated(BLEConnectionState::ConnectionState newState) = 0;
-    virtual void errorOccurred(BLEConnectionError::Error newError) = 0;
+    virtual void connectionStateUpdated(BLEConnectionState::ConnectionState newState) const = 0;
+    virtual void errorOccurred(BLEConnectionError::Error newError) const = 0;
 
     virtual ~ConnectionDelegate();
 };

@@ -3,7 +3,7 @@
 
 #include <QtBluetooth/qlowenergycontroller.h>
 #include<qbluetoothdevicediscoveryagent.h>
-#include<advertisingdelegate.h>
+#include<connectiondelegate.h>
 
 
 class QTConnectionDelegateAdapter: public QObject {
@@ -15,15 +15,15 @@ public:
 public slots:
 void deviceDiscovered(const QBluetoothDeviceInfo &info);
 
-void finished();
+void finished() const;
 
-void canceled();
+void canceled() const;
 
-void stateChanged(QLowEnergyController::ControllerState newState);
+void stateChanged(QLowEnergyController::ControllerState newState) const;
 
-void errorOccurred(QLowEnergyController::Error newError);
+void errorOccurred(QLowEnergyController::Error newError) const;
 
-void errorOccurred(QBluetoothDeviceDiscoveryAgent::Error error);
+void errorOccurred(QBluetoothDeviceDiscoveryAgent::Error error) const;
 
 private:
     ConnectionDelegate* connectionDelegate;
