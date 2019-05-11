@@ -31,7 +31,6 @@ SOURCES += \
 
 HEADERS += \
     listenerdata.h \
-    listener.h \
     blemessage.h \
     blemaincontroller.h \
     advertisingdelegate.h \
