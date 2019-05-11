@@ -27,7 +27,8 @@ SOURCES += \
     blemaincontroller.cpp \
     advertisingdelegate.cpp \
     listeningdelegate.cpp \
-    servicedata.cpp
+    servicedata.cpp \
+    connectionmanager.cpp
 
 HEADERS += \
     listenerdata.h \
@@ -37,7 +38,8 @@ HEADERS += \
     listeningdelegate.h \
     servicedata.h \
     connectionerror.h \
-    connectionstate.h
+    connectionstate.h \
+    connectionmanager.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

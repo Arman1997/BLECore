@@ -67,7 +67,7 @@ void BLEMainController::startAdvertisingSession()
     QLowEnergyAdvertisingData advertisingData;
     advertisingData.setDiscoverability(QLowEnergyAdvertisingData::DiscoverabilityGeneral);
     advertisingData.setIncludePowerLevel(true);
-    advertisingData.setLocalName("HeartRateServer");
+    advertisingData.setLocalName("BLECore_Server");
     advertisingData.setServices(QList<QBluetoothUuid>() << QBluetoothUuid::PublicBrowseGroup);
 
     QLowEnergyCharacteristicData charData;

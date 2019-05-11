@@ -4,6 +4,7 @@
 #include <advertisingdelegate.h>
 #include <listeningdelegate.h>
 #include <qbluetoothdevicediscoveryagent.h>
+#include "connectionmanager.h"
 
 class BLEMainController: public ConnectionDelegate
 {
