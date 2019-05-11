@@ -4,6 +4,7 @@
 #include<servicedata.h>
 #include<QObject>
 #include<listenerdata.h>
+#include<qbluetoothdevicediscoveryagent.h>
 
 class ConnectionDataSource
 {
@@ -13,7 +14,6 @@ public:
     virtual void serviceRemoved(const ServiceData &serviceData) = 0;
 
     virtual void deviceAdded(const BLEUserData &userData) = 0;
-    virtual void deviceRemoved(const BLEUserData &userData) = 0;
     virtual void deviceUpdated(const BLEUserData &userData) = 0;
 
     virtual ~ConnectionDataSource();
@@ -29,7 +29,7 @@ public:
         this->connectionDataSource = dataSource;
     }
 
-private slots:
+public slots:
 
 void serviceUpdated(ServiceData  serviceData)
 {
@@ -46,19 +46,14 @@ void serviceRemoved(ServiceData serviceData)
     connectionDataSource->serviceRemoved(serviceData);
 }
 
-void deviceAdded(const BLEUserData &userData)
+void deviceAdded(const QBluetoothDeviceInfo &info)
 {
-    connectionDataSource->deviceAdded(userData);
+   // connectionDataSource->deviceAdded(userData);
 }
 
-void deviceRemoved(const BLEUserData &userData)
+void deviceUpdated(const QBluetoothDeviceInfo &info, QBluetoothDeviceInfo::Fields updatedFields)
 {
-    connectionDataSource->deviceRemoved(userData);
-}
-
-void deviceUpdated(const BLEUserData &userData)
-{
-    connectionDataSource->deviceUpdated(userData);
+    //connectionDataSource->deviceUpdated(userData);
 }
 
 private:
