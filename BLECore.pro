@@ -28,7 +28,8 @@ SOURCES += \
     advertisingdelegate.cpp \
     listeningdelegate.cpp \
     servicedata.cpp \
-    connectionmanager.cpp
+    connectionmanager.cpp \
+    qtconnectiondelegateadapter.cpp
 
 HEADERS += \
     listenerdata.h \
@@ -39,7 +40,8 @@ HEADERS += \
     servicedata.h \
     connectionerror.h \
     connectionstate.h \
-    connectionmanager.h
+    connectionmanager.h \
+    qtconnectiondelegateadapter.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

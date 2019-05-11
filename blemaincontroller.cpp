@@ -19,45 +19,45 @@ BLEMainController::BLEMainController()
 
 BLEMainController::~BLEMainController()
 {
-    delete qt_connectionDelegate;
-    delete qt_connectionDataSource;
+    delete m_connectionDelegateAdapter;
+    delete m_connectionManager;
     delete deviceDiscoveryAgent;
 }
 
 void BLEMainController::establishConnectionSignals(QLowEnergyController *periperal)
 {
-    if(qt_connectionDelegate)
+    if(m_connectionDelegateAdapter)
     {
         QObject::connect(periperal,SIGNAL(QLowEnergyController::stateChanged),
-                         qt_connectionDelegate,SLOT(QT_ConnectionDelegate::stateChanged));
+                         m_connectionDelegateAdapter,SLOT(QTConnectionDelegateAdapter::stateChanged));
 
         QObject::connect(periperal,SIGNAL(QLowEnergyController::error),
-                         qt_connectionDelegate,SLOT(QT_ConnectionDelegate::errorOccurred));
+                         m_connectionDelegateAdapter,SLOT(QTConnectionDelegateAdapter::errorOccurred));
     }
 }
 
 void BLEMainController::establishDataSourceSignals(QBluetoothDeviceDiscoveryAgent *deviceDiscoveryAgent)
 {
-    if(qt_connectionDelegate) {
-        QObject::connect(deviceDiscoveryAgent,&QBluetoothDeviceDiscoveryAgent::finished,qt_connectionDelegate,
-                         &QT_ConnectionDelegate::finished);
+    if(m_connectionDelegateAdapter) {
+        QObject::connect(deviceDiscoveryAgent,&QBluetoothDeviceDiscoveryAgent::finished,m_connectionDelegateAdapter,
+                         &QTConnectionDelegateAdapter::finished);
 
         QObject::connect(deviceDiscoveryAgent,&QBluetoothDeviceDiscoveryAgent::canceled,
-                         qt_connectionDelegate, &QT_ConnectionDelegate::canceled);
+                         m_connectionDelegateAdapter, &QTConnectionDelegateAdapter::canceled);
 
         QObject::connect(deviceDiscoveryAgent, SIGNAL(error(QBluetoothDeviceDiscoveryAgent::Error)),
-                    qt_connectionDelegate, SLOT(deviceScanError(QBluetoothDeviceDiscoveryAgent::Error)));
+                    m_connectionDelegateAdapter, SLOT(deviceScanError(QBluetoothDeviceDiscoveryAgent::Error)));
 
         QObject::connect(deviceDiscoveryAgent,&QBluetoothDeviceDiscoveryAgent::deviceDiscovered,
-                         qt_connectionDelegate, &QT_ConnectionDelegate::deviceDiscovered);
+                         m_connectionDelegateAdapter, &QTConnectionDelegateAdapter::deviceDiscovered);
     }
 
-    if(qt_connectionDataSource) {
+    if(m_connectionManager) {
         QObject::connect(deviceDiscoveryAgent,&QBluetoothDeviceDiscoveryAgent::deviceDiscovered,
-                         qt_connectionDataSource,&QT_ConnectionDataSource::deviceAdded);
+                         m_connectionManager,&ConnectionManager::deviceAdded);
 
         QObject::connect(deviceDiscoveryAgent,&QBluetoothDeviceDiscoveryAgent::deviceUpdated,
-                         qt_connectionDataSource,&QT_ConnectionDataSource::deviceUpdated);
+                         m_connectionManager,&ConnectionManager::deviceUpdated);
     }
 
 }
@@ -104,10 +104,10 @@ void BLEMainController::startListeningSession()
 
 void BLEMainController::setConnectionDelegate(ConnectionDelegate connectionDelegate)
 {
-    qt_connectionDelegate = new QT_ConnectionDelegate(&connectionDelegate);
+    m_connectionDelegateAdapter = new QTConnectionDelegateAdapter(&connectionDelegate);
 }
 
 void BLEMainController::setConnectionDataSource(ConnectionDataSource connectionDateSource)
 {
-    qt_connectionDataSource = new QT_ConnectionDataSource(&connectionDateSource);
+    m_connectionManager = new ConnectionManager(&connectionDateSource);
 }

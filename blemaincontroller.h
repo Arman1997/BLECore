@@ -1,10 +1,11 @@
 #ifndef BLEMAINCONTROLLER_H
 #define BLEMAINCONTROLLER_H
 
-#include <advertisingdelegate.h>
+#include "qtconnectiondelegateadapter.h"
 #include <listeningdelegate.h>
 #include <qbluetoothdevicediscoveryagent.h>
 #include "connectionmanager.h"
+
 
 class BLEMainController: public ConnectionDelegate
 {
@@ -16,8 +17,8 @@ public:
     void startListeningSession();
 
 private:
-    QT_ConnectionDelegate* qt_connectionDelegate = nullptr;
-    QT_ConnectionDataSource* qt_connectionDataSource = nullptr;
+    QTConnectionDelegateAdapter *m_connectionDelegateAdapter = nullptr;
+    ConnectionManager *m_connectionManager = nullptr;
 
     QBluetoothDeviceDiscoveryAgent* deviceDiscoveryAgent;
 
