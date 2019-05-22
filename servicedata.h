@@ -1,8 +1,8 @@
 #ifndef SERVICEDATA_H
 #define SERVICEDATA_H
+#include <QLowEnergyService>
 
-
-class ServiceData
+class ServiceData: public QLowEnergyService
 {
 public:
     ServiceData();

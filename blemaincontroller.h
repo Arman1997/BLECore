@@ -5,6 +5,7 @@
 #include <connectiondatasource.h>
 #include <qbluetoothdevicediscoveryagent.h>
 #include "connectionmanager.h"
+#include "blemessage.h"
 
 
 class BLEMainController: public ConnectionDelegate
@@ -15,6 +16,7 @@ public:
 
     void startAdvertisingSession();
     void startListeningSession();
+    void sendMessageForService(ServiceData serviceData, BLEMessage message);
 
 private:
     QTConnectionDelegateAdapter *m_connectionDelegateAdapter = nullptr;

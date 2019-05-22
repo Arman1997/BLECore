@@ -102,6 +102,14 @@ void BLEMainController::startListeningSession()
     m_deviceDiscoveryAgent->start(QBluetoothDeviceDiscoveryAgent::LowEnergyMethod);
 }
 
+void BLEMainController::sendMessageForService(ServiceData serviceData, BLEMessage message)
+{
+    QLowEnergyCharacteristic characteristic = serviceData.characteristic(QBluetoothUuid::PublicBrowseGroup);
+    QByteArray data = QByteArray::fromStdString(message.messegeText);
+    serviceData.writeCharacteristic(characteristic,data);
+
+}
+
 void BLEMainController::setConnectionDelegate(ConnectionDelegate connectionDelegate)
 {
     m_connectionDelegateAdapter = new QTConnectionDelegateAdapter(&connectionDelegate);
