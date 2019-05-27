@@ -2,10 +2,6 @@
 #define SERVICEDATA_H
 #include <QLowEnergyService>
 
-class ServiceData: public QLowEnergyService
-{
-public:
-    ServiceData();
-};
 
+typedef QLowEnergyService ServiceData;
 #endif // SERVICEDATA_H

@@ -24,11 +24,11 @@ public:
 
 public slots:
 
-void serviceUpdated(ServiceData  serviceData);
+//void serviceUpdated(ServiceData  serviceData);
 
 void serviceAdded(const QBluetoothUuid &newService);
 
-void serviceRemoved(ServiceData serviceData);
+//void serviceRemoved(ServiceData serviceData);
 
 void deviceAdded(const QBluetoothDeviceInfo &info);
 

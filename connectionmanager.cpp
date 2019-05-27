@@ -16,11 +16,11 @@ ConnectionManager::~ConnectionManager()
     delete m_currentDevice;
     delete m_controller;
 }
-
+/*
 void ConnectionManager::serviceUpdated(ServiceData serviceData)
 {
    // m_connectionDataSource->serviceUpdated(serviceData);
-}
+}*/
 
 void ConnectionManager::serviceAdded(const QBluetoothUuid &newService)
 {
@@ -28,19 +28,16 @@ void ConnectionManager::serviceAdded(const QBluetoothUuid &newService)
         // m_connectionDataSource->serviceAdded(serviceData);
       }
 }
-
+/*
 void ConnectionManager::serviceRemoved(ServiceData serviceData)
 {
-   // m_connectionDataSource->serviceRemoved(serviceData);
-}
+}*/
 
 void ConnectionManager::deviceAdded(const QBluetoothDeviceInfo &info)
 {
     setNewDevice(info);
     clearCurrentConnection();
     if (info.coreConfigurations() & QBluetoothDeviceInfo::LowEnergyCoreConfiguration) {
-
-        // connectionDataSource->deviceAdded(userData);
 
 
         if (m_currentDevice) {
